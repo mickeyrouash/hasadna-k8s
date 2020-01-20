@@ -50,8 +50,20 @@ data:
       {{ if and .Values.reportit.enableSSL .Values.reportit.enabled }}
 {{ .Values.reportit.acmeDomains | indent 6 }}
       {{ end }}
+      {{ if and .Values.botkit.enableSSL .Values.botkit.enabled }}
+{{ .Values.botkit.acmeDomains | indent 6 }}
+      {{ end }}
+      {{ if and .Values.strapi.enableSSL .Values.strapi.enabled }}
+{{ .Values.strapi.acmeDomains | indent 6 }}
+      {{ end }}
       {{ if and .Values.datacity.enableSSL .Values.datacity.enabled }}
 {{ .Values.datacity.acmeDomains | indent 6 }}
+      {{ end }}
+      {{ if and .Values.datacityNominatim.enableSSL .Values.datacityNominatim.enabled }}
+{{ .Values.datacityNominatim.acmeDomains | indent 6 }}
+      {{ end }}
+      {{ if and .Values.datacityApi.enableSSL .Values.datacityApi.enabled }}
+{{ .Values.datacityApi.acmeDomains | indent 6 }}
       {{ end }}
       [acme.dnsChallenge]
         provider = {{ .Values.letsencrypt.dnsProvider | quote }}
@@ -122,10 +134,34 @@ data:
           url = {{ .Values.reportit.backendUrl | quote }}
       {{ end }}
 
+      {{ if .Values.botkit.enabled }}
+      [backends.botkit]
+        [backends.botkit.servers.server1]
+          url = {{ .Values.botkit.backendUrl | quote }}
+      {{ end }}
+
+      {{ if .Values.strapi.enabled }}
+      [backends.strapi]
+        [backends.strapi.servers.server1]
+          url = {{ .Values.strapi.backendUrl | quote }}
+      {{ end }}
+
       {{ if .Values.datacity.enabled }}
       [backends.datacity]
         [backends.datacity.servers.server1]
           url = {{ .Values.datacity.backendUrl | quote }}
+      {{ end }}
+
+      {{ if .Values.datacityNominatim.enabled }}
+      [backends.datacityNominatim]
+        [backends.datacityNominatim.servers.server1]
+          url = {{ .Values.datacityNominatim.backendUrl | quote }}
+      {{ end }}
+
+      {{ if .Values.datacityApi.enabled }}
+      [backends.datacityApi]
+        [backends.datacityApi.servers.server1]
+          url = {{ .Values.datacityApi.backendUrl | quote }}
       {{ end }}
 
       {{ if .Values.migdarInternalSearch.enabled }}
@@ -247,6 +283,30 @@ data:
           rule = {{ .Values.reportit.frontendRule | quote }}
       {{ end }}
 
+      {{ if .Values.botkit.enabled }}
+      [frontends.botkit]
+        backend="botkit"
+        passHostHeader = true
+        {{ if .Values.botkit.enableSSL }}
+        [frontends.botkit.headers]
+          SSLRedirect = true
+        {{ end }}
+        [frontends.botkit.routes.route1]
+          rule = {{ .Values.botkit.frontendRule | quote }}
+      {{ end }}
+
+      {{ if .Values.strapi.enabled }}
+      [frontends.strapi]
+        backend="strapi"
+        passHostHeader = true
+        {{ if .Values.strapi.enableSSL }}
+        [frontends.strapi.headers]
+          SSLRedirect = true
+        {{ end }}
+        [frontends.strapi.routes.route1]
+          rule = {{ .Values.strapi.frontendRule | quote }}
+      {{ end }}
+
       {{ if .Values.datacity.enabled }}
       [frontends.datacity]
         backend="datacity"
@@ -257,6 +317,30 @@ data:
         {{ end }}
         [frontends.datacity.routes.route1]
           rule = {{ .Values.datacity.frontendRule | quote }}
+      {{ end }}
+
+      {{ if .Values.datacityNominatim.enabled }}
+      [frontends.datacityNominatim]
+        backend="datacityNominatim"
+        passHostHeader = true
+        {{ if .Values.datacityNominatim.enableSSL }}
+        [frontends.datacityNominatim.headers]
+          SSLRedirect = true
+        {{ end }}
+        [frontends.datacityNominatim.routes.route1]
+          rule = {{ .Values.datacityNominatim.frontendRule | quote }}
+      {{ end }}
+
+      {{ if .Values.datacityApi.enabled }}
+      [frontends.datacityApi]
+        backend="datacityApi"
+        passHostHeader = true
+        {{ if .Values.datacityApi.enableSSL }}
+        [frontends.datacityApi.headers]
+          SSLRedirect = true
+        {{ end }}
+        [frontends.datacityApi.routes.route1]
+          rule = {{ .Values.datacityApi.frontendRule | quote }}
       {{ end }}
 
       {{ if .Values.migdarInternalSearch.enabled }}

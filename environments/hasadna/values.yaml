@@ -19,7 +19,7 @@ traefik:
 
   budgetkey:
     enabled: true
-    frontendRule: "Host:next.obudget.org,data.obudget.org,socialmap.org.il,www.socialmap.org.il,kibana.obudget.org,www.obudget.org,obudget.org,pipelines.obudget.org"
+    frontendRule: "Host:next.obudget.org,data.obudget.org,socialmap.org.il,www.socialmap.org.il,kibana.obudget.org,www.obudget.org,obudget.org,pipelines.obudget.org,dgp.obudget.org"
     backendUrl: "http://nginx.budgetkey:80"
 
   oknesset:
@@ -99,10 +99,34 @@ traefik:
     backendUrl: "http://reportit.reportit:80"
     enableSSL: false
 
+  botkit:
+    enabled: true
+    frontendRule: "Host:botkit-cms.obudget.org"
+    backendUrl: "http://botkit.reportit:3000"
+    enableSSL: false
+  
+  strapi:
+    enabled: true
+    frontendRule: "Host:reportit-cms.obudget.org,cms.equality.org.il"
+    backendUrl: "http://strapi.reportit:1337"
+    enableSSL: false
+
   datacity:
     enabled: true
     frontendRule: "Host:app.datacity.org.il"
     backendUrl: "http://frontend.datacity:8000"
+    enableSSL: false
+
+  datacityNominatim:
+    enabled: true
+    frontendRule: "Host:geocode.datacity.org.il"
+    backendUrl: "http://nominatim.datacity:8080"
+    enableSSL: false
+
+  datacityApi:
+    enabled: true
+    frontendRule: "Host:api.datacity.org.il"
+    backendUrl: "http://api.datacity:8000"
     enableSSL: false
 
   migdarInternalSearch:

@@ -1,10 +1,18 @@
 anyway:
   image: uumpa/anyway:267f7419d02e00e6e74e9e57e2a217cf33b7d57c
   productionImage: uumpa/anyway:ef99d85b586a94d9e3b98a3e7dad195334318311
+datacity:
+  backendImage: hasadna/datacity-backend@sha256:3ffa18d333f64b80d053fb35a2801a0c55929a4d868cc7074731f589e4a0e9a4
+  frontendImage: hasadna/datacity-importer@sha256:2f6c1b9585b775ce0c849b7e9c342d8237089233e0f909d6eaa9f5854320702e
 mysadna:
   image: uumpa/hasadna-mysadna:c0a681d5a0c68ada76b6d68fce1c2115224790a9
 odata:
-  ckanImage: orihoch/odata-ckan:e921261f0a849cf5887208424e9162b97b4e3fe2
+  ckanImage: orihoch/odata-ckan:e0667a991c446460a5381cad917843d4e3e86a08
 oknesset:
   DataBackendImage: uumpa/knesset-data-backend:bc03d3c1830a856d6bbacf4b2481d83dd1f836c6
-  WebUiImage: uumpa/knesset-data-web-ui:191f7f5cea8115d86dcdb20450449a437cfab1f3
+  WebUiImage: uumpa/knesset-data-web-ui:94b6de1cc89ae20647e35aa606c3c9b95e81dbe6
+openpension:
+  client:
+    image: hasadna/open-pension-client:35203fc0dda65a30155caff9c81eaee4a946258b
+  server:
+    image: uumpa/hasadna-openpension:server-c72f525ec4d7de2e4337c0a7b0b1f6f8d357b72f
